@@ -22,9 +22,9 @@ en format gzip contenant la date de création.
 Grâce au TP1 on va pouvoir rajouter une petite commande dans le dockerfile afin d'y insérer directement la crontab.
 
 ```bash
-    crontab -l | { cat; echo "0 17 * * 1 mysqldump -uroot -proot --all-databases | 
-    gzip -9 -c > /backups/all_databases_$(date +\%Y-\%m-\%d-\%H:\%M:\%S).sql.gz"; } | 
-    crontab -
+crontab -l | { cat; echo "0 17 * * 1 mysqldump -uroot -proot --all-databases | 
+gzip -9 -c > /backups/all_databases_$(date +\%Y-\%m-\%d-\%H:\%M:\%S).sql.gz"; } | 
+crontab -
 ```
 
 Cette commande va récuperer (s'il y a déjà) les crontab existantes et rajouter celle-ci dans la liste.
@@ -61,3 +61,6 @@ La configuration se fait grâce à ce fichier que l'on a copié dans notre conta
 ```
 
 là ou `/backups/all_databases` est un fichier créé au préalable dans le dockerfile `touch /backups/all_databases`
+
+
+A la fin, en ayant suivi les 3 TPs sur le même dockerfile, on a ET la crontab ET le logrotate, mais ceci est seulement à des fins de démonstration, en réalité il faudrait choisir soi l'un, soi l'autre, logrotate étant le plus attirant à mon sens.
