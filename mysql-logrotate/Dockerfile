@@ -7,6 +7,8 @@ RUN apt-get update && \
     crontab -l | { cat; echo "0 17 * * 1 mysqldump -uroot -proot --all-databases | gzip -9 -c > /backups/all_databases_$(date +\%Y-\%m-\%d-\%H:\%M:\%S).sql.gz"; } | crontab - && \
     touch /backups/all_databases
 
+ENV TZ Europe/Paris
+
 COPY mysql /etc/logrotate.d/mysql
 
 EXPOSE 3306 33060

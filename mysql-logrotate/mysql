@@ -4,7 +4,6 @@
   compress
   compresscmd bzip2
   compressext .bz2
-  create 640 mysql mysql
   postrotate
       mysqldump -uroot -proot --all-databases | gzip -9 -c > all_databases.sql.gz
   endscript
